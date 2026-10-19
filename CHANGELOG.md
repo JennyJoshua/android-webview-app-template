@@ -25,6 +25,11 @@ All notable changes to this project will be documented here.
 - Documentation: README, docs/SETUP.md, docs/WEBVIEW_CONFIGURATION.md,
   docs/WEBSITE_IMPORT_GUIDE.md, docs/TROUBLESHOOTING.md.
 
+### Fixed
+
+- Build failed in `:app:checkDebugDuplicateClasses` (kotlin-stdlib 1.8.22 vs kotlin-stdlib-jdk7/jdk8 1.6.21).
+  Added `kotlin-bom:1.8.22` platform dependency to align them.
+
 ### Not yet verified
 
 - A real Gradle build, the GitHub Actions run, and installation on an Android device.

@@ -110,6 +110,10 @@ android {
 }
 
 dependencies {
+    // Aligns kotlin-stdlib, -jdk7 and -jdk8 (AndroidX libraries pull in mixed Kotlin versions,
+    // which otherwise fails :app:checkDebugDuplicateClasses). The app itself is Java.
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.22"))
+
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("androidx.webkit:webkit:1.11.0")
     implementation("androidx.core:core-splashscreen:1.0.1")

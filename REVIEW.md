@@ -78,8 +78,8 @@ run and the device tests have NOT been performed yet.
 
 Date: 2026-10-20
 Reviewer: Claude (sandbox checks only; no human or device review yet)
-Build workflow URL: none yet
-Build result: NOT TESTED (Gradle could not run in the authoring sandbox).
+Build workflow URL: none recorded
+Build result: Run 1 (2026-10-19) FAILED at :app:checkDebugDuplicateClasses (Kotlin stdlib version conflict). Fix applied (kotlin-bom 1.8.22); re-run pending. In that run gradle/actions confirmed the Gradle wrapper JAR is a known, valid one (SHA-256 498495120a03...4f17). Java compilation was not reached.
 Automated test result: UrlPolicyTest, 11 of 11 tests passed when compiled with javac 21 against
 minimal JUnit stand-ins and run directly on a JVM. This is NOT a Gradle/JUnit run.
 Other local checks: validate-project.sh passed; all XML files are well-formed; workflow YAML parses.
