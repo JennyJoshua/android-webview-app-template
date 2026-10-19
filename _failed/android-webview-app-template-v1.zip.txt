@@ -1,0 +1,1 @@
+forbidden folder (.git, .github, node_modules, .next): .github/workflows/android-build.yml
