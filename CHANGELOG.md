@@ -30,7 +30,11 @@ All notable changes to this project will be documented here.
 - Build failed in `:app:checkDebugDuplicateClasses` (kotlin-stdlib 1.8.22 vs kotlin-stdlib-jdk7/jdk8 1.6.21).
   Added `kotlin-bom:1.8.22` platform dependency to align them.
 
+### Verified
+
+- Android CI passes (validate, unit tests, debug APK, artifact upload) and the APK installs on an Android phone.
+
 ### Not yet verified
 
-- A real Gradle build, the GitHub Actions run, and installation on an Android device.
-  See REVIEW.md for the recorded results.
+- WebView behaviour on a device: page loading, back button, error screen, bundled mode, uploads/downloads.
+  See REVIEW.md.

@@ -2,11 +2,10 @@
 
 ## 1. Current Status
 
-Status: Implementation written. Partially verified in a sandbox that could NOT run Gradle
-(no Android SDK; services.gradle.org and Google Maven were unreachable).
+Status: Builds in GitHub Actions and installs on the owner's Android phone. WebView behaviour
+(page loading, back button, error screen, bundled mode) has not been checked item by item yet.
 
-Nothing below is ticked unless it was actually checked. The Gradle build, the GitHub Actions
-run and the device tests have NOT been performed yet.
+Nothing below is ticked unless it was actually checked or reported by the owner.
 
 ## 2. Repository Structure
 
@@ -47,16 +46,16 @@ run and the device tests have NOT been performed yet.
 
 ## 5. GitHub Actions
 
-- [ ] Project validation workflow passes. (script passes locally; workflow not run)
-- [ ] Automated tests pass. (see section 8)
-- [ ] Debug APK builds successfully.
-- [ ] Build failures are reported clearly. (step summaries and test-report artifact are configured; not exercised)
-- [ ] APK artifact is uploaded successfully.
-- [ ] APK can be downloaded from the workflow run.
+- [x] Project validation workflow passes. (Android CI green on 2026-10-20 after the Kotlin BOM fix)
+- [x] Automated tests pass. (the unit-test job is a prerequisite of the build job, which succeeded)
+- [x] Debug APK builds successfully. (Android CI run after the fix)
+- [x] Build failures are reported clearly. (observed on run 1: failing Gradle task and error text visible, failure summary step ran)
+- [x] APK artifact is uploaded successfully. (upload step fails the run if no APK exists)
+- [x] APK can be downloaded from the workflow run. (owner downloaded and installed it)
 
 ## 6. Android Device Testing
 
-- [ ] APK installs on a compatible Android device.
+- [x] APK installs on a compatible Android device. (owner's phone; device model and Android version not recorded)
 - [ ] App launches successfully.
 - [ ] Website loading is verified.
 - [ ] Navigation is verified.
@@ -77,22 +76,24 @@ run and the device tests have NOT been performed yet.
 ## 8. Review Results
 
 Date: 2026-10-20
-Reviewer: Claude (sandbox checks only; no human or device review yet)
-Build workflow URL: none recorded
-Build result: Run 1 (2026-10-19) FAILED at :app:checkDebugDuplicateClasses (Kotlin stdlib version conflict). Fix applied (kotlin-bom 1.8.22); re-run pending. In that run gradle/actions confirmed the Gradle wrapper JAR is a known, valid one (SHA-256 498495120a03...4f17). Java compilation was not reached.
-Automated test result: UrlPolicyTest, 11 of 11 tests passed when compiled with javac 21 against
-minimal JUnit stand-ins and run directly on a JVM. This is NOT a Gradle/JUnit run.
-Other local checks: validate-project.sh passed; all XML files are well-formed; workflow YAML parses.
-Android installation result: NOT TESTED.
+Reviewer: Claude (sandbox checks and CI logs) plus owner device report
+Build workflow URL: not recorded
+Build result:
+- Run 1 (2026-10-19) FAILED at :app:checkDebugDuplicateClasses (Kotlin stdlib 1.8.22 vs 1.6.21 conflict).
+  Fixed by adding the kotlin-bom 1.8.22 platform dependency.
+- Run after the fix: SUCCESS (reported by owner): validate, unit tests, debug APK build and artifact upload.
+- gradle/actions confirmed the wrapper JAR is a known valid one (SHA-256 498495120a03...4f17).
+Automated test result: unit-test job passed in CI (11 UrlPolicyTest cases; also run on a plain JVM during authoring).
+Android installation result: APK installed on the owner's phone and was reported as working.
 
-Not compiled anywhere yet: MainActivity.java, AppConfig.java, the Gradle scripts and the
-resources (they need the Android SDK and AndroidX libraries).
+Not yet verified on a device: website loading in REMOTE mode, back navigation, network error screen,
+bundled mode, file upload/download, login redirects, external link handling.
 
 Issues found:
-- Pending the first real GitHub Actions run.
+- Kotlin stdlib duplicate-class conflict (fixed).
 
 Required fixes:
-- Pending. Expect that the first CI run may reveal compile or Gradle errors; paste the log to get them fixed.
+- None known. Complete the device checks in sections 3 and 6, then decide on release.
 
 ## 9. Release Decision
 
