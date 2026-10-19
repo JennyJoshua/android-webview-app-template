@@ -33,8 +33,9 @@ All notable changes to this project will be documented here.
 ### Verified
 
 - Android CI passes (validate, unit tests, debug APK, artifact upload) and the APK installs on an Android phone.
+- Owner device tests: REMOTE mode with own site (loading, back button, login stays in app), error screen and Retry,
+  BUNDLED mode offline with local storage, and the workflow form building a second app side by side.
 
 ### Not yet verified
 
-- WebView behaviour on a device: page loading, back button, error screen, bundled mode, uploads/downloads.
-  See REVIEW.md.
+- HYBRID mode, file uploads/downloads and detailed external-link handling on a device. See REVIEW.md.

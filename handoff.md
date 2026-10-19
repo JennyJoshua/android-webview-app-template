@@ -55,21 +55,21 @@ Explain that bundling the frontend does not bundle the backend.
 Implement these modes with a clear, documented configuration
 mechanism.
 
-## 4. Implementation Status (added 2026-10-20)
+## 4. Implementation Status (updated 2026-10-20)
 
 Implemented: Android project, Gradle build and wrapper, three modes configured through
 `app-config.properties`, WebView behaviour and security defaults, sample bundled site,
 unit tests, `Android CI` workflow, and all documents listed in PROJECT_REQUIREMENTS.md section 8.
 
-Verified so far (authoring sandbox only): required-file validation, XML well-formedness, workflow YAML
-parses, and `UrlPolicyTest` (11/11) run on a plain JVM with JUnit stand-ins.
+Verified: Android CI passes (validate, unit tests, debug APK, artifact). The APK installs on an Android phone.
+Owner device tests passed for REMOTE mode, the error screen with Retry, BUNDLED mode offline with local storage,
+and the workflow form building a second app beside the first. One build failure (Kotlin stdlib conflict) was found
+and fixed with a kotlin-bom dependency.
 
-NOT yet verified: Gradle build, GitHub Actions run, APK install on a device. The sandbox had no Android SDK and
-could not reach Gradle or Google Maven. `MainActivity.java`, `AppConfig.java`, the Gradle scripts and the
-resources have never been compiled.
+Not yet device-tested: HYBRID mode, file upload/download, detailed external-link handling.
+Debug APK only; release signing is not configured.
 
 Next steps for whoever continues:
-1. Upload the project, run **Android CI**, and read REVIEW.md section 8.
-2. If a job fails, fix the first error in the log; do not rewrite completed files.
-3. Install the APK on a device and tick the REVIEW.md checklists with real results.
-4. Delete the old extension-less `PROJECT_REQUIREMENTS` file.
+1. Test HYBRID mode against a real backend when needed.
+2. Test uploads/downloads on a site that uses them.
+3. Delete the old extension-less `PROJECT_REQUIREMENTS` file if it still exists.

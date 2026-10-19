@@ -34,7 +34,8 @@ Full steps: [docs/SETUP.md](docs/SETUP.md)
 
 ## Status
 
-Written but not yet built in CI. See [REVIEW.md](REVIEW.md) for what has and has not been verified.
+Builds in GitHub Actions and installs on Android. REMOTE and BUNDLED modes passed device tests; HYBRID mode and
+uploads/downloads are not yet device-tested. See [REVIEW.md](REVIEW.md).
 
 ## Known limitations
 
