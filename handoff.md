@@ -54,3 +54,22 @@ Explain that bundling the frontend does not bundle the backend.
 
 Implement these modes with a clear, documented configuration
 mechanism.
+
+## 4. Implementation Status (added 2026-10-20)
+
+Implemented: Android project, Gradle build and wrapper, three modes configured through
+`app-config.properties`, WebView behaviour and security defaults, sample bundled site,
+unit tests, `Android CI` workflow, and all documents listed in PROJECT_REQUIREMENTS.md section 8.
+
+Verified so far (authoring sandbox only): required-file validation, XML well-formedness, workflow YAML
+parses, and `UrlPolicyTest` (11/11) run on a plain JVM with JUnit stand-ins.
+
+NOT yet verified: Gradle build, GitHub Actions run, APK install on a device. The sandbox had no Android SDK and
+could not reach Gradle or Google Maven. `MainActivity.java`, `AppConfig.java`, the Gradle scripts and the
+resources have never been compiled.
+
+Next steps for whoever continues:
+1. Upload the project, run **Android CI**, and read REVIEW.md section 8.
+2. If a job fails, fix the first error in the log; do not rewrite completed files.
+3. Install the APK on a device and tick the REVIEW.md checklists with real results.
+4. Delete the old extension-less `PROJECT_REQUIREMENTS` file.

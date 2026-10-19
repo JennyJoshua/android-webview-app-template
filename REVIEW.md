@@ -2,32 +2,33 @@
 
 ## 1. Current Status
 
-Status: Documentation and planning in progress.
+Status: Implementation written. Partially verified in a sandbox that could NOT run Gradle
+(no Android SDK; services.gradle.org and Google Maven were unreachable).
 
-No Android build or installation tests are claimed as passed
-until the corresponding tests have actually been performed.
+Nothing below is ticked unless it was actually checked. The Gradle build, the GitHub Actions
+run and the device tests have NOT been performed yet.
 
 ## 2. Repository Structure
 
-- [ ] All required Android source files are present.
-- [ ] Root Gradle configuration is present.
-- [ ] settings.gradle.kts is present.
-- [ ] App-level Gradle configuration is present.
-- [ ] gradlew and gradlew.bat are present.
-- [ ] Gradle wrapper properties are present.
-- [ ] Gradle wrapper JAR is present.
-- [ ] AndroidManifest.xml is present.
-- [ ] Required resources and assets are present.
+- [x] All required Android source files are present. (scripts/validate-project.sh)
+- [x] Root Gradle configuration is present.
+- [x] settings.gradle.kts is present.
+- [x] App-level Gradle configuration is present.
+- [x] gradlew and gradlew.bat are present.
+- [x] Gradle wrapper properties are present.
+- [x] Gradle wrapper JAR is present (43,504-byte genuine JAR from the Gradle 8.9.0 source tag, valid ZIP).
+- [x] AndroidManifest.xml is present.
+- [x] Required resources and assets are present.
 
 ## 3. WebView Functionality
 
 - [ ] Remote HTTPS website mode works.
 - [ ] Bundled website mode works.
-- [ ] Hybrid frontend and backend mode is documented and tested.
+- [ ] Hybrid frontend and backend mode is documented and tested. (documented; not tested)
 - [ ] Loading progress is displayed appropriately.
 - [ ] Android back navigation works.
 - [ ] Network errors are handled.
-- [ ] Navigation restrictions work as documented.
+- [ ] Navigation restrictions work as documented. (policy logic unit-tested on a JVM only; not on a device)
 - [ ] Login and redirect behaviour is checked.
 - [ ] Cookies and storage work where required.
 - [ ] File uploads and downloads are tested where supported.
@@ -35,21 +36,21 @@ until the corresponding tests have actually been performed.
 
 ## 4. Security Review
 
-- [ ] HTTPS is the default.
-- [ ] TLS certificate errors are not bypassed.
-- [ ] Cleartext HTTP is disabled by default.
-- [ ] Unsafe local-file access is avoided.
-- [ ] JavaScript bridges are not unnecessarily exposed.
-- [ ] Allowed-host restrictions are reviewed.
-- [ ] Secrets are not committed to the repository.
-- [ ] Third-party licences are reviewed.
+- [x] HTTPS is the default (build fails for non-https START_URL in REMOTE mode).
+- [x] TLS certificate errors are not bypassed (code review: handler.cancel()).
+- [x] Cleartext HTTP is disabled by default (manifest + network security config).
+- [x] Unsafe local-file access is avoided (code review).
+- [x] JavaScript bridges are not unnecessarily exposed (none registered).
+- [ ] Allowed-host restrictions are reviewed by the owner.
+- [x] Secrets are not committed to the repository (validate script scan).
+- [ ] Third-party licences are reviewed. (Dependencies are AndroidX, Apache-2.0; gradle-wrapper.jar is Apache-2.0. Owner review pending.)
 
 ## 5. GitHub Actions
 
-- [ ] Project validation workflow passes.
-- [ ] Automated tests pass.
+- [ ] Project validation workflow passes. (script passes locally; workflow not run)
+- [ ] Automated tests pass. (see section 8)
 - [ ] Debug APK builds successfully.
-- [ ] Build failures are reported clearly.
+- [ ] Build failures are reported clearly. (step summaries and test-report artifact are configured; not exercised)
 - [ ] APK artifact is uploaded successfully.
 - [ ] APK can be downloaded from the workflow run.
 
@@ -64,29 +65,34 @@ until the corresponding tests have actually been performed.
 
 ## 7. Documentation
 
-- [ ] README.md is complete.
-- [ ] PROJECT_REQUIREMENTS.md matches the implementation.
-- [ ] DECISIONS.md reflects approved decisions.
-- [ ] CHANGELOG.md records notable changes.
+- [x] README.md is complete.
+- [x] PROJECT_REQUIREMENTS.md matches the implementation.
+- [x] DECISIONS.md reflects approved decisions.
+- [x] CHANGELOG.md records notable changes.
 - [ ] Setup instructions are tested.
 - [ ] Website import instructions are tested.
-- [ ] Troubleshooting instructions are useful.
-- [ ] Known limitations are documented.
+- [x] Troubleshooting instructions are written.
+- [x] Known limitations are documented.
 
 ## 8. Review Results
 
-Date:
-Reviewer:
-Build workflow URL:
-Build result: Not yet tested.
-Automated test result: Not yet tested.
-Android installation result: Not yet tested.
+Date: 2026-10-20
+Reviewer: Claude (sandbox checks only; no human or device review yet)
+Build workflow URL: none yet
+Build result: NOT TESTED (Gradle could not run in the authoring sandbox).
+Automated test result: UrlPolicyTest, 11 of 11 tests passed when compiled with javac 21 against
+minimal JUnit stand-ins and run directly on a JVM. This is NOT a Gradle/JUnit run.
+Other local checks: validate-project.sh passed; all XML files are well-formed; workflow YAML parses.
+Android installation result: NOT TESTED.
+
+Not compiled anywhere yet: MainActivity.java, AppConfig.java, the Gradle scripts and the
+resources (they need the Android SDK and AndroidX libraries).
 
 Issues found:
-Pending.
+- Pending the first real GitHub Actions run.
 
 Required fixes:
-Pending.
+- Pending. Expect that the first CI run may reveal compile or Gradle errors; paste the log to get them fixed.
 
 ## 9. Release Decision
 
