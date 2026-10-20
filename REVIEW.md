@@ -3,8 +3,7 @@
 ## 1. Current Status
 
 Status: Builds in GitHub Actions, installs on the owner's Android phone, and passed the owner's device tests for
-REMOTE mode, BUNDLED mode, the error screen and the workflow form. HYBRID mode, uploads/downloads and
-external-link handling are not yet verified on a device.
+REMOTE, BUNDLED and HYBRID modes, the error screen, the workflow form, uploads, downloads and link handling.
 
 Nothing below is ticked unless it was actually checked or reported by the owner.
 
@@ -24,15 +23,15 @@ Nothing below is ticked unless it was actually checked or reported by the owner.
 
 - [x] Remote HTTPS website mode works. (owner device test, 2026-10-20)
 - [x] Bundled website mode works. (owner device test: sample page offline, local storage counter)
-- [ ] Hybrid frontend and backend mode is documented and tested. (documented; not tested)
+- [x] Hybrid frontend and backend mode is documented and tested. (owner device test with hybrid-test.html: bundled page called a public HTTPS API)
 - [ ] Loading progress is displayed appropriately.
 - [x] Android back navigation works. (owner device test)
 - [x] Network errors are handled. (owner device test: airplane-mode error screen and Retry)
-- [ ] Navigation restrictions work as documented. (policy logic unit-tested on a JVM only; not on a device)
+- [x] Navigation restrictions work as documented. (device: allowed host opened in the app, other host opened in the browser; policy also unit-tested)
 - [x] Login and redirect behaviour is checked. (owner device test: login stayed in the app for the owner's site)
 - [x] Cookies and storage work where required. (localStorage verified in bundled mode; cookies via the owner's site login)
-- [ ] File uploads and downloads are tested where supported.
-- [ ] External links are handled appropriately.
+- [x] File uploads and downloads are tested where supported. (device: file picker worked; GitHub ZIP download completed)
+- [x] External links are handled appropriately. (device: non-allowed link opened in the browser app)
 
 ## 4. Security Review
 
@@ -91,8 +90,13 @@ Owner device tests (2026-10-20), all passed: own site loads and back button work
 BUNDLED sample page works offline with local storage; workflow form built a second app (different name and ID)
 installed beside the first; login stayed inside the app.
 
-Not yet verified on a device: HYBRID mode, file upload/download, loading-progress bar appearance, navigation
-restrictions and external-link handling in detail, website import instructions.
+Second round of owner device tests (2026-10-20), all 5 passed, using the bundled hybrid-test.html page in HYBRID mode
+(ALLOWED_HOSTS=github.com,codeload.github.com): backend API call from the bundled page; allowed-host link opened in the
+app with back returning; non-allowed link opened in the browser app; file upload picker; file download via
+DownloadManager.
+
+Not yet verified: loading-progress bar appearance, website import instructions, a real custom backend with
+login/cookies in HYBRID mode, third-party licence review, owner review of allowed-host restrictions.
 
 Issues found:
 - Kotlin stdlib duplicate-class conflict (fixed).
@@ -107,6 +111,5 @@ Required fixes:
 - [x] Documentation is complete.
 - [x] A successful debug APK is available.
 
-Release status: Approved for use as a template for REMOTE and BUNDLED modes (2026-10-20).
-HYBRID mode, uploads/downloads and detailed external-link behaviour are implemented and documented but
-not device-tested; debug APK only (no release signing).
+Release status: Approved for use as a template for REMOTE, BUNDLED and HYBRID modes (2026-10-20).
+Debug APK only (no release signing). Hybrid was tested against a public API, not a custom backend with login.

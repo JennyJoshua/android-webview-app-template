@@ -6,6 +6,9 @@ All notable changes to this project will be documented here.
 
 ### Added
 
+- `app/src/main/assets/www/hybrid-test.html` and a link to it from the sample home page, for testing HYBRID mode,
+  uploads, downloads and link handling on a device.
+
 - `PROJECT_REQUIREMENTS.md` — project requirements and acceptance criteria.
 - `DECISIONS.md` — approved initial project decisions (D001-D007) plus implementation choices (D008-D014).
 - Complete Android project: Gradle build (AGP 8.5.2, Gradle 8.9), manifest, resources, Java sources.
@@ -35,7 +38,9 @@ All notable changes to this project will be documented here.
 - Android CI passes (validate, unit tests, debug APK, artifact upload) and the APK installs on an Android phone.
 - Owner device tests: REMOTE mode with own site (loading, back button, login stays in app), error screen and Retry,
   BUNDLED mode offline with local storage, and the workflow form building a second app side by side.
+- Owner device tests with the new `hybrid-test.html` page: HYBRID backend call, in-app vs external link handling,
+  file upload, file download (5 of 5 passed).
 
 ### Not yet verified
 
-- HYBRID mode, file uploads/downloads and detailed external-link handling on a device. See REVIEW.md.
+- HYBRID mode with a custom backend that uses login/cookies, and the website import instructions. See REVIEW.md.

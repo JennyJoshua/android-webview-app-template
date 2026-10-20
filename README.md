@@ -34,8 +34,8 @@ Full steps: [docs/SETUP.md](docs/SETUP.md)
 
 ## Status
 
-Builds in GitHub Actions and installs on Android. REMOTE and BUNDLED modes passed device tests; HYBRID mode and
-uploads/downloads are not yet device-tested. See [REVIEW.md](REVIEW.md).
+Builds in GitHub Actions and installs on Android. REMOTE, BUNDLED and HYBRID modes, uploads and downloads passed device tests
+(HYBRID against a public API). See [REVIEW.md](REVIEW.md).
 
 ## Known limitations
 

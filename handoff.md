@@ -63,13 +63,13 @@ unit tests, `Android CI` workflow, and all documents listed in PROJECT_REQUIREME
 
 Verified: Android CI passes (validate, unit tests, debug APK, artifact). The APK installs on an Android phone.
 Owner device tests passed for REMOTE mode, the error screen with Retry, BUNDLED mode offline with local storage,
-and the workflow form building a second app beside the first. One build failure (Kotlin stdlib conflict) was found
+the workflow form building a second app beside the first, and HYBRID mode, link handling, upload and download
+(via the sample hybrid-test.html page). One build failure (Kotlin stdlib conflict) was found
 and fixed with a kotlin-bom dependency.
 
-Not yet device-tested: HYBRID mode, file upload/download, detailed external-link handling.
+Not yet tested: HYBRID mode with a custom backend using login/cookies; loading-progress bar appearance.
 Debug APK only; release signing is not configured.
 
 Next steps for whoever continues:
-1. Test HYBRID mode against a real backend when needed.
-2. Test uploads/downloads on a site that uses them.
-3. Delete the old extension-less `PROJECT_REQUIREMENTS` file if it still exists.
+1. Test HYBRID mode against your own backend (CORS, cookies) when you have one.
+2. Delete the old extension-less `PROJECT_REQUIREMENTS` file if it still exists.
